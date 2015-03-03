@@ -16,10 +16,10 @@ class OffSetCalculatorTest < MiniTest::Test
   end
 
   def test_it_formats_the_date_correctly
-    assert_equal "030315", calculator.formatted_date
+    assert_equal "030315", calculator.date 
   end
 
-  def test_it_squares_the_number_form_of_date
+  def test_it_squares_the_number_of_date
     assert_equal ["9", "1", "8", "9", "9", "9", "2", "2", "5"], calculator.square_the_formatted_date
   end
 

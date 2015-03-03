@@ -3,18 +3,12 @@ class OffSetCalculator
 attr_accessor :date, :results
 
   def initialize
-    @date = Time.now.strftime("%m%d%Y")
+    @date = Time.now.strftime("%m%d%y")
     @results = []
   end
 
-  def formatted_date 
-    date = @date.chars
-    date.slice!(4..5)
-    date.join("")
-  end
-
   def format_to_numeric_form
-    formatted_date.to_i
+    @date.to_i
   end
 
   def square_the_formatted_date
@@ -31,5 +25,3 @@ attr_accessor :date, :results
 
 end
 
-calc = OffSetCalculator.new
-print calc.take_last_four_digits
