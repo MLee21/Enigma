@@ -1,3 +1,5 @@
+require '../lib/keys'
+
 class OffSetCalculator
 
 attr_accessor :date, :results
