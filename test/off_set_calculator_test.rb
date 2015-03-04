@@ -27,23 +27,19 @@ class OffSetCalculatorTest < MiniTest::Test
     assert_equal [9,2,2,5], calculator.take_last_four_digits
   end
 
-  #This will be tests with key rotations 
-
-  def test_the_first_digit_of_off_set_is_added_to_rotation_A
-
+  def test_it_will_split_out_the_four_digits_to_match_with_off_set_a
+    assert_equal 9, calculator.off_set_for_rotation_a
   end
 
-  def test_the_second_digit_of_off_set_is_added_to_rotation_B
-
-
+  def test_it_will_split_out_the_four_digits_to_match_with_off_set_b
+    assert_equal 2, calculator.off_set_for_rotation_b
   end
 
-  def test_the_third__of_off_set_is_added_to_rotation_C
-
+  def test_it_will_split_out_the_four_digits_to_match_with_off_set_c
+    assert_equal 2, calculator.off_set_for_rotation_c
   end
 
-  def test_the_fourth_of_off_set_is_added_to_rotation_d
-
-
+  def test_it_will_split_out_the_four_digits_to_match_with_off_set_d
+    assert_equal 5, calculator.off_set_for_rotation_d
   end
 end
