@@ -28,6 +28,10 @@ attr_reader :key
     key.stub :key_generator, [0,1,2,3,4] do
       assert_equal 01, key.rot_a
     end
+
+    key.stub :key_generator, [0,0,0,0,0] do
+      assert_equal 00, key.rot_a
+    end
   end
 
   def test_second_and_third_digits_equals_rotation_B
@@ -37,10 +41,18 @@ attr_reader :key
   end
 
   def test_third_and_fourth_digits_equals_rotation_C
-    skip
+    key.stub :key_generator, [3,6,4,2,4] do
+      assert_equal 42, key.rot_c
+    end
   end
 
   def test_fourth_and_fifth_digits_equals_rotation_D
-    skip
+    key.stub :key_generator, [5,1,2,3,0] do
+      assert_equal 30, key.rot_d
+    end
+
+    key.stub :key_generator, [3,3,3,0,0] do
+      assert_equal 00, key.rot_d
+    end
   end
 end
