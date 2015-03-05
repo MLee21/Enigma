@@ -1,16 +1,13 @@
-require 'message.txt'
-
 class Encryptor
 
-    def initialize(filename)
-      File.read(filename)
-    end
+  def initialize(filename)
+    @filename = filename
+    @message = File.read(@filename)     # => "\"tree\""
+  end                       # => nil
 
-    def file_reader(text)
-    
-    
-    end
+  def message
+    @message
   end
+end  # => nil
 
-
-end
+encrypt = Encryptor.new("/Users/MinnieLee/Turing/1Module/Enigma/lib/message.txt")  # => #<Encryptor:0x007ff45384ebb8>
