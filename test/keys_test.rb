@@ -1,3 +1,5 @@
+require 'simplecov'
+SimpleCov.start 
 gem "minitest"
 require "minitest"
 require "minitest/autorun"
@@ -9,7 +11,7 @@ class KeysTest < MiniTest::Test
 attr_reader :key
 
   def setup
-    @key = Keys.new([3,4,5,6,7])
+    @key = Keys.new
   end
   
   def test_it_exists
@@ -18,10 +20,6 @@ attr_reader :key
 
   def test_it_generates_a_five_digit_key
     assert_equal key.generate.length, 5
-  end
-
-  def test_rotation_A_will_return_first_two_digits_of_key
-    assert_equal 34, key.rot_a
   end
 
   def test_rotation_A_will_return_first_two_digits_of_key

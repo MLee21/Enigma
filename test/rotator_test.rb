@@ -1,3 +1,5 @@
+require 'simplecov'
+SimpleCov.start
 gem "minitest"
 require "minitest"
 require "minitest/autorun"
@@ -11,9 +13,9 @@ class RotatorTest < MiniTest::Test
   attr_reader :rotation, :key, :calc, :map
 
   def setup
+    @key = Keys.new
     @calc = OffSetCalculator.new
     @rotation = Rotator.new
-    @key = Keys.new
   end
 
   def test_it_exists
@@ -39,12 +41,12 @@ class RotatorTest < MiniTest::Test
   end
 
   def test_the_first_digit_of_off_set_is_added_to_rotation_a
-        key.stub :key_generate, [3,6,3,7,4] do
-          assert_equal 36, key.rot_a
+        key.stub :key_generate, [3,2,4,5,6] do
+          assert_equal 32, key.rot_a
         calc.stub :off_set_for_rotation_a, 9 do
           assert_equal 9, calc.off_set_for_rotation_a
-        rotation.stub :add_rot_a_to_off_set, 45 do
-          assert_equal 45, rotation.add_rot_a_to_off_set
+        rotation.stub :add_rot_a_to_off_set, 41 do
+          assert_equal 41, rotation.add_rot_a_to_off_set
         end
       end
     end
@@ -81,6 +83,45 @@ class RotatorTest < MiniTest::Test
           assert_equal 8, calc.off_set_for_rotation_d
         rotation.stub :add_rot_d_to_off_set, 8 do
           assert_equal 8, rotation.add_rot_d_to_off_set
+        end
+      end
+    end
+  end
+
+  def test_it_will_move_a_letter_forward
+        key.stub :key_generate, [4,5,3,7,8] do 
+          assert_equal 45, key.rot_a 
+        calc.stub :off_set_for_rotation_a, 9 do
+          assert_equal 9, calc.off_set_for_rotation_a
+        rotation.stub :add_rot_a_to_off_set, 54 do
+          assert_equal 54, rotation.add_rot_a_to_off_set
+          assert_equal "p", rotation.move_forward("a",54)
+        end
+      end
+    end
+  end
+
+  def test_it_will_move_a_different_letter_forward
+        key.stub :key_generate, [4,5,3,7,8] do 
+          assert_equal 45, key.rot_a 
+        calc.stub :off_set_for_rotation_a, 9 do
+          assert_equal 9, calc.off_set_for_rotation_a
+        rotation.stub :add_rot_a_to_off_set, 54 do
+          assert_equal 54, rotation.add_rot_a_to_off_set
+          assert_equal "v", rotation.move_forward("g",54)
+        end
+      end
+    end
+  end
+
+   def test_it_will_move_a_letter_forward
+        key.stub :key_generate, [0,0,3,0,0] do 
+          assert_equal 03, key.rot_b
+        calc.stub :off_set_for_rotation_a, 5 do
+          assert_equal 5, calc.off_set_for_rotation_a
+        rotation.stub :add_rot_a_to_off_set, 8 do
+          assert_equal 8, rotation.add_rot_a_to_off_set
+          assert_equal "i", rotation.move_forward("a",8)
         end
       end
     end
