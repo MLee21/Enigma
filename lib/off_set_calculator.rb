@@ -1,10 +1,9 @@
 class OffSetCalculator
 
-attr_accessor :date, :results
+attr_accessor :date
 
-  def initialize
-    @date = Time.now.strftime("%m%d%y")
-    @results = []
+  def initialize(date = Time.now.strftime("%m%d%y"))
+    @date = date
   end
 
   def format_to_numeric_form
@@ -24,20 +23,21 @@ attr_accessor :date, :results
   end
 
   def off_set_for_rotation_a
-    off_set_for_a = take_last_four_digits[0]
+    take_last_four_digits[0]
   end
 
   def off_set_for_rotation_b
-    off_set_for_b = take_last_four_digits[1]
+    take_last_four_digits[1]
   end
 
   def off_set_for_rotation_c
-    off_set_for_b = take_last_four_digits[2]
+    take_last_four_digits[2]
   end
 
   def off_set_for_rotation_d
-    off_set_for_b = take_last_four_digits[3]
+    take_last_four_digits[3]
   end
-
 end
+
+
 
