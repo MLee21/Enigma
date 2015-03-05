@@ -8,7 +8,7 @@ require_relative '../lib/off_set_calculator'
 
 class RotatorTest < MiniTest::Test
 
-  attr_reader :rotation, :key, :calc
+  attr_reader :rotation, :key, :calc, :map
 
   def setup
     @calc = OffSetCalculator.new
@@ -18,6 +18,24 @@ class RotatorTest < MiniTest::Test
 
   def test_it_exists
     assert Rotator.new
+  end
+
+  def test_character_map_includes_lowercase_letters
+    ('a'..'z').each do |letter|
+      assert rotation.character_map.include?(letter)
+    end
+  end
+
+  def test_character_map_includes_integers
+    (0..9).each do |number|
+      assert rotation.character_map.include?(number)
+    end
+  end
+
+  def test_character_map_includes_three_misc_characters
+    [" ",",","."].each do |character|
+      assert rotation.character_map.include?(character)
+    end
   end
 
   def test_the_first_digit_of_off_set_is_added_to_rotation_a
