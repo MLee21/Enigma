@@ -12,24 +12,18 @@ class Keys
     key_multiply.shuffle.take(5)
   end
 
-  def rot_a
-    key_generate[0..1].join.to_i
-  end
-
-  def rot_b
-   key_generate[1..2].join.to_i
-  end
-
-  def rot_c
-    key_generate[2..3].join.to_i
-  end
-
-  def rot_d
-    key_generate[3..4].join.to_i
+  def all_rotations
+    key_rotations = key_generate
+    key_rotations.map do |number|                
+    c = key_rotations.shift(1)                
+    d = key_rotations.shift(1)                 
+    key_rotations << [c, d].flatten.join.to_i  
+    key_rotations = d + key_rotations           
+    key_rotations[4]                           
+    end                                        
   end
 end
-  #chunk the first two - start over - move over one,
-  #chunk the next two, etc. -> push into new array
+
 
 
 

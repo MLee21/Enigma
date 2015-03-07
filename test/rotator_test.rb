@@ -41,89 +41,117 @@ class RotatorTest < MiniTest::Test
   end
 
   def test_the_first_digit_of_off_set_is_added_to_rotation_a
-        key.stub :key_generate, [3,2,4,5,6] do
-          assert_equal 32, key.rot_a
-        calc.stub :off_set_for_rotation_a, 9 do
-          assert_equal 9, calc.off_set_for_rotation_a
-        rotation.stub :add_rot_a_to_off_set, 41 do
-          assert_equal 41, rotation.add_rot_a_to_off_set
+        key.stub :all_rotations, [67,36,57,62] do
+          assert_equal [67,36,57,62], key.all_rotations
+        calc.stub :take_last_four_digits, [8,5,4,1] do
+          assert_equal [8,5,4,1] , calc.take_last_four_digits
+        rotation.stub :final_rotations, [75,41,61,63] do
+          assert_equal [75,41,61,63], rotation.final_rotations
         end
       end
     end
   end
 
   def test_the_second_digit_of_off_set_is_added_to_rotation_b
-        key.stub :key_generate, [0,0,5,3,2] do
-          assert_equal 05, key.rot_b
-        calc.stub :off_set_for_rotation_b, 5 do
-          assert_equal 5, calc.off_set_for_rotation_b
-        rotation.stub :add_rot_b_to_off_set, 10 do
-          assert_equal 10, rotation.add_rot_b_to_off_set
+        key.stub :all_rotations, [45,67,32,41] do
+          assert_equal [45,67,32,41], key.all_rotations
+        calc.stub :take_last_four_digits, [7,6,9,3] do
+          assert_equal [7,6,9,3], calc.take_last_four_digits
+        rotation.stub :final_rotations, [52,73,41,44] do
+          assert_equal [52,73,41,44], rotation.final_rotations
         end
       end
     end   
   end
 
   def test_the_third__of_off_set_is_added_to_rotation_c
-        key.stub :key_generate, [0,3,5,0,9] do
-          assert_equal 50, key.rot_c 
-        calc.stub :off_set_for_rotation_c, 0 do
-          assert_equal 0, calc.off_set_for_rotation_c
-        rotation.stub :add_rot_c_to_off_set, 50 do
-          assert_equal 50, rotation.add_rot_c_to_off_set
+        key.stub :all_rotations, [12,87,45,9] do
+          assert_equal [12,87,45,9], key.all_rotations
+        calc.stub :take_last_four_digits, [0,3,2,6] do
+          assert_equal [0,3,2,6], calc.take_last_four_digits
+        rotation.stub :final_rotations, [12,90,47,15] do
+          assert_equal [12,90,47,15], rotation.final_rotations
         end
       end
     end
   end
 
   def test_the_fourth_of_off_set_is_added_to_rotation_d
-        key.stub :key_generate, [0,0,3,0,0] do
-          assert_equal 00, key.rot_d 
-        calc.stub :off_set_for_rotation_d, 8 do
-          assert_equal 8, calc.off_set_for_rotation_d
-        rotation.stub :add_rot_d_to_off_set, 8 do
-          assert_equal 8, rotation.add_rot_d_to_off_set
+        key.stub :all_rotations, [45,67,23,12] do
+          assert_equal [45,67,23,12], key.all_rotations
+        calc.stub :take_last_four_digits, [4,2,3,1] do
+          assert_equal [4,2,3,1], calc.take_last_four_digits
+        rotation.stub :final_rotations, [49,69,26,13] do
+          assert_equal [49,69,26,13], rotation.final_rotations
         end
       end
     end
   end
 
   def test_it_will_move_a_letter_forward
-        key.stub :key_generate, [4,5,3,7,8] do 
-          assert_equal 45, key.rot_a 
-        calc.stub :off_set_for_rotation_a, 9 do
-          assert_equal 9, calc.off_set_for_rotation_a
-        rotation.stub :add_rot_a_to_off_set, 54 do
-          assert_equal 54, rotation.add_rot_a_to_off_set
-          assert_equal "p", rotation.move_forward("a",54)
+          key.stub :all_rotations, [23,43,56,98] do
+            assert_equal [23,43,56,98], key.all_rotations
+          calc.stub :take_last_four_digits, [4,2,3,1] do
+            assert_equal [4,2,3,1], calc.take_last_four_digits
+          rotation.stub :final_rotations, [27,45,59,99] do
+            assert_equal [27,45,59,99], rotation.final_rotations
         end
       end
     end
   end
 
   def test_it_will_move_a_different_letter_forward
-        key.stub :key_generate, [4,5,3,7,8] do 
-          assert_equal 45, key.rot_a 
-        calc.stub :off_set_for_rotation_a, 9 do
-          assert_equal 9, calc.off_set_for_rotation_a
-        rotation.stub :add_rot_a_to_off_set, 54 do
-          assert_equal 54, rotation.add_rot_a_to_off_set
-          assert_equal "v", rotation.move_forward("g",54)
+        key.stub :all_rotations, [00,00,00,00] do
+            assert_equal [00,00,00,00], key.all_rotations
+          calc.stub :take_last_four_digits, [2,4,6,5] do
+            assert_equal [2,4,6,5], calc.take_last_four_digits
+          rotation.stub :final_rotations, [2,4,6,5] do
+            assert_equal [2,4,6,5], rotation.final_rotations
         end
       end
     end
   end
 
-   def test_it_will_move_a_letter_forward
-        key.stub :key_generate, [0,0,3,0,0] do 
-          assert_equal 03, key.rot_b
-        calc.stub :off_set_for_rotation_a, 5 do
-          assert_equal 5, calc.off_set_for_rotation_a
-        rotation.stub :add_rot_a_to_off_set, 8 do
-          assert_equal 8, rotation.add_rot_a_to_off_set
-          assert_equal "i", rotation.move_forward("a",8)
+   def test_it_will_add_rotations_and_offsets
+          key.stub :all_rotations, [12,50,22,00] do
+            assert_equal [12,50,22,00], key.all_rotations
+          calc.stub :take_last_four_digits, [9,2,2,5] do
+            assert_equal [9,2,2,5], calc.take_last_four_digits
+          rotation.stub :final_rotations, [21,52,24,5] do
+            assert_equal [21,52,24,5], rotation.final_rotations
         end
       end
     end
   end
+
+  def test_it_will_add_rotations_to_correct_off_sets
+          key.stub :all_rotations, [00,03,30,00] do
+            assert_equal [00,03,30,00], key.all_rotations
+          calc.stub :take_last_four_digits, [9,2,2,5] do
+            assert_equal [9,2,2,5], calc.take_last_four_digits
+          rotation.stub :final_rotations, [9,5,32,5] do
+            assert_equal [9,5,32,5], rotation.final_rotations
+        end
+      end
+    end
+  end
+
+  def test_it_will_move_letters_forward_in_map    
+      rotation.stub :final_rotations, [50,17,54,26] do
+        assert_equal [50,17,54,26], rotation.final_rotations
+      rotation.stub :move_forward, "2.ql" do
+        assert_equal "2.ql", rotation.move_forward("ruby")
+      end
+    end
+  end
+
+  def test_it_will_move_other_letters_forward_in_map
+      rotation.stub :final_rotations, [50,17,54,26] do
+        assert_equal [50,17,54,26], rotation.final_rotations
+      rotation.stub :move_forward, "48t4" do
+        assert_equal "48t4", rotation.move_forward("tree")
+      end
+    end       
+  end
 end
+

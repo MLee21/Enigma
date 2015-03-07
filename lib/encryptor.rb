@@ -1,13 +1,25 @@
 class Encryptor
 
-  def initialize(filename)
-    @filename = filename
-    @message = File.read(@filename)     # => "\"tree\""
-  end                       # => nil
+    # Encrypt four characters at the same time.
+    # First rotated by A + offset
+    # Second rotated by B + offset
+    # Third rotated by C + offset
+    # Fourth rotated by D + offset
+    # Encrypt message in file and create encrypted file
+    # with encrypted message
 
-  def message
-    @message
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
   end
-end  # => nil
-
-encrypt = Encryptor.new("/Users/MinnieLee/Turing/1Module/Enigma/lib/message.txt")  # => #<Encryptor:0x007ff45384ebb8>

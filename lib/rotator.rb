@@ -1,42 +1,42 @@
-require_relative '../lib/off_set_calculator'
-require_relative '../lib/keys'
+require_relative '../lib/off_set_calculator'  # => true
+require_relative '../lib/keys'                # => true
 
-require 'pry'
+require 'pry'  # => true
 
 class Rotator
 
-CHARACTER_MAP = [*('a'..'z'),*(0..9),' ','.',','] 
+  attr_reader :key, :off_set, :final_rotations  # => nil
+
+CHARACTER_MAP = [*('a'..'z'),*(0..9),' ','.',',']  # => ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, " ", ".", ","]
 
   def initialize
     @key = Keys.new
     @off_set = OffSetCalculator.new
-  end
+    @final_rotations = [] 
+  end                                # => nil
 
   def character_map
     map = [*('a'..'z'),*(0..9),' ','.',','] 
-  end 
+  end                                        # => nil
 
-  def add_rot_a_to_off_set
-    @key.rot_a + @off_set.off_set_for_rotation_a  
-  end
+  def final_rotations
+    keys = @key.all_rotations
+    offsets = @off_set.take_last_four_digits
+    keys.zip(offsets).map.with_index {|index| index.reduce(:+)}
+  end                                                            # => nil
 
-  def add_rot_b_to_off_set
-    @key.rot_b + @off_set.off_set_for_rotation_b
-  end
-
-  def add_rot_c_to_off_set
-    @key.rot_c + @off_set.off_set_for_rotation_c
-  end
-
-  def add_rot_d_to_off_set
-    @key.rot_d + @off_set.off_set_for_rotation_d
-  end
-
-  def move_forward(letter,final_rotation)
-    move_letter_forward = final_rotation + CHARACTER_MAP.index(letter)
-    new_position = character_map[move_letter_forward % 39] 
-    new_position 
-  end
-end
+  def move_forward(letters)
+    split_letters = letters.chars
+    each_rotation = final_rotations 
+    results = split_letters.map do |letter|
+      CHARACTER_MAP.index(letter)
+    end
+    move_forward = each_rotation.zip(results).map.with_index {|i| i.reduce(:+)}
+    move_forward.map do |number|
+      CHARACTER_MAP[number % 39]
+    end
+  end                                                                  # => nil
+end 
+                                                                # => nil
 
 
