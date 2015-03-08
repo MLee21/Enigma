@@ -1,41 +1,61 @@
-require_relative '../lib/off_set_calculator'  # => true
-require_relative '../lib/keys'                # => true
+require_relative '../lib/off_set_calculator'  
+require_relative '../lib/keys'               
 
-require 'pry'  # => true
+require 'pry'  
 
 class Rotator
 
-  attr_reader :key, :off_set, :final_rotations  # => nil
+  attr_reader :key, :off_set, :final_rotations  
 
-CHARACTER_MAP = [*('a'..'z'),*(0..9),' ','.',',']  # => ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, " ", ".", ","]
+b = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+CHARACTER_MAP = [*('a'..'z'),*(b),' ','.',',']  
 
   def initialize
     @key = Keys.new
     @off_set = OffSetCalculator.new
     @final_rotations = [] 
-  end                                # => nil
+  end                                
 
   def character_map
+    b = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
     map = [*('a'..'z'),*(0..9),' ','.',','] 
-  end                                        # => nil
+  end                                      
 
   def final_rotations
     keys = @key.all_rotations
     offsets = @off_set.take_last_four_digits
     keys.zip(offsets).map.with_index {|index| index.reduce(:+)}
-  end                                                            # => nil
+  end                                                           
 
   def move_forward(letters)
-  split_letters = letters.chars
-  each_rotation = final_rotations 
-  results = split_letters.map do |letter|
-    CHARACTER_MAP.index(letter)
+    count = letters.size / 4
+    each_rotation = final_rotations * (count + 1)
+    results = letters.chars.map do |letter|
+      CHARACTER_MAP.index(letter)
+    end
+    results.zip(each_rotation).map do |pair|
+      position = pair.reduce(:+) % 39
+      CHARACTER_MAP[position]
+    end
   end
-  group_by_four = results.each_slice(4).to_a
-  grouped = each_rotation.map{|number|group_by_four.map {|element| element.map {|inner_element| inner_element + number }}}
-  new_positions = grouped[0].flatten
-  new_positions.map {|number|cmap[number % 39]}.join("")                                                                 # => nil
-end 
-                                                                # => nil
 
+  def move_backward(letters)
+    count = letters.size / 4
+    each_rotation = final_rotations * (count + 1)
+    results = letters.chars.map do |letter|
+      CHARACTER_MAP.index(letter)
+    end
+    results.zip(each_rotation).map do |pair|
+      position = pair.reduce(:-) % 39
+      CHARACTER_MAP[position]
+    end.join("")
+  end
+end
+
+
+
+
+
+
+                                                               
 

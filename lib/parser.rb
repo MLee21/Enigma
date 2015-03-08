@@ -5,9 +5,10 @@ class Parser
     @message = File.read(@filename)
   end                     
 
-  def file_reader
+  def read_file
     @message
   end
 end  
 
-# parse = Parser.new("/Users/MinnieLee/Turing/1Module/Enigma/lib/test.txt")  
+# parse = Parser.new("/Users/MinnieLee/Turing/1Module/Enigma/lib/test.txt") 
+# puts parse.read_file

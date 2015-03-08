@@ -20,10 +20,10 @@ class ParserTest < MiniTest::Test
   end
 
   def test_it_can_read_a_file
-    assert_equal "tree. flower.", @parse.file_reader
+    assert_equal "do i dare disturb the universe.", @parse.read_file
   end
 
   def test_it_can_read_two_lines_from_a_file
-    assert_equal "tree. flower.", @parse.file_reader
+    assert_equal "do i dare disturb the universe.", @parse.read_file
   end
 end
