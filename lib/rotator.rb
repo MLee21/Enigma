@@ -26,16 +26,15 @@ CHARACTER_MAP = [*('a'..'z'),*(0..9),' ','.',',']  # => ["a", "b", "c", "d", "e"
   end                                                            # => nil
 
   def move_forward(letters)
-    split_letters = letters.chars
-    each_rotation = final_rotations 
-    results = split_letters.map do |letter|
-      CHARACTER_MAP.index(letter)
-    end
-    move_forward = each_rotation.zip(results).map.with_index {|i| i.reduce(:+)}
-    move_forward.map do |number|
-      CHARACTER_MAP[number % 39]
-    end
-  end                                                                  # => nil
+  split_letters = letters.chars
+  each_rotation = final_rotations 
+  results = split_letters.map do |letter|
+    CHARACTER_MAP.index(letter)
+  end
+  group_by_four = results.each_slice(4).to_a
+  grouped = each_rotation.map{|number|group_by_four.map {|element| element.map {|inner_element| inner_element + number }}}
+  new_positions = grouped[0].flatten
+  new_positions.map {|number|cmap[number % 39]}.join("")                                                                 # => nil
 end 
                                                                 # => nil
 
