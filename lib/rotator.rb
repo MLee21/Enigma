@@ -29,11 +29,11 @@ CHARACTER_MAP = [*('a'..'z'),*(b),' ','.',',']
 
   def move_forward(letters)
     count = letters.size / 4
-    each_rotation = final_rotations * (count + 1)
+    rotation = final_rotations * (count + 1)
     results = letters.chars.map do |letter|
       CHARACTER_MAP.index(letter)
     end
-    results.zip(each_rotation).map do |pair|
+    results.zip(rotation).map do |pair|
       position = pair.reduce(:+) % 39
       CHARACTER_MAP[position]
     end
@@ -41,14 +41,14 @@ CHARACTER_MAP = [*('a'..'z'),*(b),' ','.',',']
 
   def move_backward(letters)
     count = letters.size / 4
-    each_rotation = final_rotations * (count + 1)
+    rotation = final_rotations * (count + 1)
     results = letters.chars.map do |letter|
       CHARACTER_MAP.index(letter)
     end
-    results.zip(each_rotation).map do |pair|
+    results.zip(rotation).map do |pair|
       position = pair.reduce(:-) % 39
       CHARACTER_MAP[position]
-    end.join("")
+    end
   end
 end
 

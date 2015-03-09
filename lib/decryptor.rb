@@ -9,9 +9,9 @@ class Decryptor
   #takes in the encrypted text
   #decrypts it
   #writes it to a 'decrypted text' file.
-  attr_accessor :read_message
+  attr_accessor :read_message, :decrypted_message, :decrypted_file, :key, :date
 
-  def initialize(filename = ARGV.first, decrypted_file = ARGV[1])
+  def initialize(filename = ARGV.first, decrypted_file = ARGV[1], key = ARGV[2], date = ARGV[3])
     @decrypted_file = decrypted_file
     @read_message = Parser.new(filename).read_file
     @rotator = Rotator.new
@@ -22,15 +22,16 @@ class Decryptor
   end
 
   def output_message
-    "Created '#{decrypted_file}' with the key #{@key.key_generate.join} and date #{@offset.date}"
+    "Created '#{decrypted_file}' with the key #{key} and date #{@offset.date}"
   end
 
+  #using key and date from encrypt, decrypt.
   def decrypt
-    @rotator.move_backward(read_message)
+    @rotator.move_backward(read_message).join("")
   end
 end
 
 decrypted = Decryptor.new
 puts decrypted.read_message
-decrypt.decrypted_message
-puts decrypt.output_message
+decrypted.decrypted_message
+puts decrypted.output_message
