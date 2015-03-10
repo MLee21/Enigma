@@ -5,7 +5,7 @@ class Keys
   attr_accessor :key
 
 
-  def initialize(key =  key_generate)
+  def initialize(key = key_generate)
     @key = key
   end
 

@@ -26,13 +26,17 @@ class Rotator
     end
   end
 
+  def counter(letters)
+    i = 0
+    until i == letters.size - 4
+      @current_rotations << @current_rotations[i]
+        i += 1
+    end
+  end
+
   def move_forward(letters)
     @current_rotations = final_rotations
-    i = 0
-      until i == letters.size - 4
-        @current_rotations << @current_rotations[i]
-          i += 1
-      end
+    counter(letters)
     results = split_characters(letters)
     results.zip(@current_rotations).map do |pair| 
       position = pair.inject(:+) % 39
@@ -54,11 +58,7 @@ class Rotator
   def move_backward(letters, key)
     rot_key = convert_key_for_decrypt(key)
     @current_rotations = rot_key.zip(@off_set.take_last_four_digits).map {|index| index.reduce(:+)}
-    i = 0
-    until i == letters.size - 4
-      @current_rotations << @current_rotations[i]
-        i += 1 
-    end
+    counter(letters)
     results = split_characters(letters) 
     results.zip(@current_rotations).map do |pair| 
       position = pair.reduce(:-) 

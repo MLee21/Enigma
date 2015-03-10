@@ -7,8 +7,9 @@ class Decryptor
 
   attr_accessor :read_message, :decrypted_message, :decrypted_file, :key, :offset
 
-  def initialize(filename = ARGV.first, decrypted_file = ARGV[1], key = ARGV[2])
+  def initialize(filename, decrypted_file, key)
     @filename = filename
+    @key = key
     @decrypted_file = decrypted_file
     @read_message = File.read(filename)
     @rotator = Rotator.new
@@ -23,6 +24,11 @@ class Decryptor
   end
 end
 
-decrypted = Decryptor.new
+if __FILE__ == $0
+filename = ARGV.first
+decrypted_file = ARGV[1]
+key = ARGV[2]
+decrypted = Decryptor.new(filename, decrypted_file, key)
 decrypted.read_message
 decrypted.decrypted_message
+end

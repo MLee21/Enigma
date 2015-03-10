@@ -6,9 +6,10 @@ class Encryptor
     # Encrypt message in file and create encrypted file
     # with encrypted message
 
-  attr_accessor :read_message, :filename, :encrypt, :encrypted_message, :encrypted_file
+  attr_accessor :read_message, :filename, :encrypt_file, :encrypted_message, :encrypted_file
 
-  def initialize(filename = ARGV.first, encrypted_file = ARGV[1])
+  # def initialize(filename = ARGV.first, encrypted_file = ARGV[1])
+   def initialize(filename, encrypted_file) 
     @filename = filename
     @encrypted_file = encrypted_file
     @read_message = File.read(filename)
@@ -31,7 +32,11 @@ class Encryptor
   end
 end
 
-encrypt = Encryptor.new
+if __FILE__ == $0
+filename = ARGV.first
+encrypted_file = ARGV[1]
+encrypt = Encryptor.new(filename, encrypted_file)
 encrypt.read_message
 encrypt.encrypted_message
+end
 # ("/Users/MinnieLee/Turing/1Module/Enigma/lib/test.txt") 
