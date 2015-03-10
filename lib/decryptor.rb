@@ -19,7 +19,7 @@ class Decryptor
 
   def decrypt
     puts "Created '#{ARGV[1]}' with the key #{ARGV[2]} and date #{@offset.date}"
-    @rotator.move_backward(read_message, ARGV[2])
+    @rotator.move_backward(read_message, ARGV[2]).join("")
   end
 end
 

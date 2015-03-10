@@ -41,7 +41,7 @@ class Rotator
   end
 
   def convert_key_for_decrypt(key)
-    results = key.scan(/\d/).map {|i| i.to_i}
+    results = key.to_s.scan(/\d/).map {|i| i.to_i}
       results.map do |number|
       c = results.shift(1)
       d = results.shift(1)
@@ -51,24 +51,26 @@ class Rotator
     end
   end
 
-  # def move_backward(letters, key)
-  #   rot_key = convert_key_for_decrypt(key)
-  #   @current_rotations = rot_key.zip(@off_set.take_last_four_digits).map {|index| index.reduce(:+)}
-  #   i = 0
-  #   until i == letters.size - 4
-  #     @current_rotations << @current_rotations[i]
-  #       i += 1 
-  #   end
-  #   results = split_characters(letters) 
-  #   results.zip(@current_rotations).map do |pair| 
-  #     position = pair.reduce(:-) 
-  #       if position < 0 
-  #         position += 39 
-  #       end
-  #     @character_map[position] 
-  #   end
-  # end
+  def move_backward(letters, key)
+    rot_key = convert_key_for_decrypt(key)
+    @current_rotations = rot_key.zip(@off_set.take_last_four_digits).map {|index| index.reduce(:+)}
+    i = 0
+    until i == letters.size - 4
+      @current_rotations << @current_rotations[i]
+        i += 1 
+    end
+    results = split_characters(letters) 
+    results.zip(@current_rotations).map do |pair| 
+      position = pair.reduce(:-) 
+        if position < 0 
+          position += 39 
+        end
+      @character_map[position] 
+    end
+  end
 end
+
+
 
 
 
