@@ -19,7 +19,6 @@ attr_accessor :date
     results = last_four.map do |i|
       i.to_i
     end
-    results
   end
 end
 

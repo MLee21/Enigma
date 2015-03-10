@@ -1,28 +1,32 @@
+require 'pry'
+
 class Keys
 
-  attr_accessor :generate
+  attr_accessor :key
 
-  def initialize(generate = key_generate)
-    @generate = generate
+
+  def initialize(key =  key_generate)
+    @key = key
   end
 
   def key_generate
-    key = (0..9).to_a
-    key_multiply = key * 5
+    random_key = (0..9).to_a
+    key_multiply = random_key * 5
     key_multiply.shuffle.take(5)
   end
 
   def all_rotations
-    key_rotations = key_generate
-    key_rotations.map do |number|                
-    c = key_rotations.shift(1)                
-    d = key_rotations.shift(1)                 
-    key_rotations << [c, d].flatten.join.to_i  
-    key_rotations = d + key_rotations           
-    key_rotations[4]                           
-    end                                        
+    @key.map do |number|                
+      c = @key.shift(1)                
+      d = @key.shift(1)                 
+      @key << [c, d].flatten.join.to_i  
+      @key = d + @key          
+      @key[4]                      
+    end
   end
 end
+
+
 
 
 
