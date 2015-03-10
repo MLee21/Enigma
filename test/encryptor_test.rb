@@ -22,10 +22,10 @@ class EncryptorTest < MiniTest::Test
   end
 
   def test_it_can_read_a_file
-    assert_equal "do you even lift, bro.", @encrypt.read_message
+    assert_equal "do you even lift bro.", @encrypt.read_message
   end
 
   def test_it_can_encrypt_a_file_with_the_correct_length_of_characters
-    assert_equal 22, @encrypt.encrypted_message
+    assert_equal 21, @encrypt.encrypted_message
   end
 end

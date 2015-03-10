@@ -2,7 +2,7 @@ gem "minitest"
 require "minitest"
 require "minitest/autorun"
 require "minitest/pride"
-require_relative '../lib/decryptor'
+require '../lib/decryptor'
 require_relative '../lib/rotator'
 require_relative '../lib/off_set_calculator'
 
@@ -22,14 +22,9 @@ class DecryptorTest < MiniTest::Test
 
   # def test_runs
   #   skip
-  #   assert Decryptor.new(file_path,'decrypted.txt', "12345")
+  #   assert Decryptor
+  #   # assert Decryptor.new(file_path,'decrypted.txt', "12345")
   # end
-
-  
-
-
-
-
 end
 
 
